@@ -1,0 +1,93 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2015 Annual Report | Wisconsin Energy Institute</title>
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    
+    <script src="https://use.typekit.net/qrc6ohb.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  </head>
+  <body>
+	<div class="off-canvas-wrapper">
+	    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+	      <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
+			<ul class="menu vertical" data-accordion-menu>
+				<li>
+					<a href="#">Forward in Energy</a>
+					<ul class="menu vertical nested">
+						<li><a href="#">Letter from the Director</a></li>
+						<li><a href="#">Our Mission</a></li>
+						<li><a href="#">2015 Timeline</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">World-Class Research</a>
+					<ul class="menu vertical nested">
+						<li><a href="#">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+						<li><a href="#">Five</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Education &amp; Outreach</a>
+					<ul class="menu vertical nested">
+						<li><a href="#">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+						<li><a href="#">Five</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Industrial Engagement</a>
+					<ul class="menu vertical nested">
+						<li><a href="#">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Additional Info</a>
+					<ul class="menu vertical nested">
+						<li><a href="#">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+					</ul>
+				</li>
+			
+			</ul>
+	      </div>
+	      <div class="off-canvas-content" data-off-canvas-content>
+	      	<div class="title-bar">
+	      	  	<div class="row">
+		      	    <div class="medium-1 columns">
+		      	    	<button class="menu-icon" type="button" data-open="offCanvasLeft"></button>
+		      	    </div>
+		      	    <div class="medium-11 columns">	
+			      	    <div class="site-title">
+			      	    <a href="https://energy.wisc.edu/" title="Wisconsin Energy Institute Home Page"><img src="{{root}}assets/img/crest.png" alt="WEI Logo" title="WEI Logo" class="logo" /></a>
+			      	    <h1 class="title-bar-title"><a href="{{root}}" title="2015 Annual Report Home">Wisconsin Energy Institute 2015 Annual Report</a></h1>
+			      	</div> 
+	      	  	</div>
+	      	</div>
+	      	</div>
+	      	{{!-- Pages you create in the src/pages/ folder are inserted here when the flattened page is created. --}}
+	      	{{> body}}
+	      	
+	      
+	      </div>
+	    </div>
+	  </div>
+	{{> footer}}
+    <script src="{{root}}assets/js/app.js"></script>
+  </body>
+</html>

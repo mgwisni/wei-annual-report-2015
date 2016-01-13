@@ -1,0 +1,71 @@
+{{!-- This is the base layout for your project, and will be used on every page. --}}
+
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    <meta property="og:url" content="{{ url }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{{ description }}" />
+    <meta property="og:image" content="{{ img }}" />
+    <meta property="og:site_name" content="Wisconsin Energy Institute 2015 Annual Report">
+
+    <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:700,300,400|Merriweather:400,400italic,700' rel='stylesheet' type='text/css'>
+
+    <script src="https://use.typekit.net/qrc6ohb.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  </head>
+  <body>
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+          {{> sidenav}}
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+<!--           <div class="title-bar" data-responsive-toggle="offCanvas" data-hide-for="medium">
+            <button type="button" class="button" data-toggle="offCanvas">Open Menu</button>
+            <div class="title-bar-title">Menu</div>
+          </div> -->
+          <div class="row title-bar">
+            <div class="small-3 medium-3 large-3 columns logo-container"> 
+              <a href="https://energy.wisc.edu/" title="Wisconsin Energy Institute Home Page">
+                <img alt="WEI Logo" title="WEI Logo" class="logo" data-interchange="[{{root}}assets/img/wei-logo-m.png, small], [{{root}}assets/img/wei-logo-m.png, medium], [{{root}}assets/img/wei-logo.png, large]">
+              </a>
+            </div>  
+            <div class="small-6 medium-6 large-6 columns site-title text-center">
+              <h1 class="title-bar-title"><a href="{{root}}" title="2015 Annual Report Home">2015 Annual Report</a></h1>
+            </div> 
+            <div class="small-3 medium-3 columns menu-button-container"> 
+              <button type="button" class="button hide-for-large" data-toggle="offCanvas">Menu</button>
+            </div> 
+          </div>      
+          <div class="row">
+            <div class="large-3 columns show-for-large">
+              {{> sidenav}}
+            </div>  
+            <div class="medium-12 large-9 columns story-container">
+              {{> body}}  
+            </div>
+          </div>
+
+          {{> footer}}
+        </div>
+      </div>
+    </div>
+    
+    <script src="{{root}}assets/js/app.js"></script>
+    {{!-- ShareThis Script --}}
+    <script type="text/javascript">
+    var switchTo5x=true;
+    var __st_loadLate=true; //if __st_loadLate is defined then the widget will not load on domcontent ready
+    </script>
+    <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "eb6e46ab-315b-4a37-97e7-3a44faa44d9f", doNotHash: true, doNotCopy: true, hashAddressBar: false, embeds: true, onHover: false, shorten: false});</script>
+  </body>
+</html>

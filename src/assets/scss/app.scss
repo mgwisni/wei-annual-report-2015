@@ -4,40 +4,776 @@
 @import 'foundation';
 @import 'motion-ui';
 
-@include foundation-global-styles;
-@include foundation-grid;
-@include foundation-typography;
-@include foundation-button;
-@include foundation-forms;
-@include foundation-visibility-classes;
-@include foundation-float-classes;
-@include foundation-accordion;
-@include foundation-badge;
-@include foundation-breadcrumbs;
-@include foundation-button-group;
-@include foundation-callout;
-@include foundation-close-button;
-@include foundation-drilldown-menu;
-@include foundation-dropdown;
-@include foundation-dropdown-menu;
-@include foundation-flex-video;
-@include foundation-label;
-@include foundation-media-object;
-@include foundation-menu;
-@include foundation-off-canvas;
-@include foundation-orbit;
-@include foundation-pagination;
-@include foundation-progress-bar;
-@include foundation-slider;
-@include foundation-sticky;
-@include foundation-reveal;
-@include foundation-switch;
-@include foundation-table;
-@include foundation-tabs;
-@include foundation-thumbnail;
-@include foundation-title-bar;
-@include foundation-tooltip;
-@include foundation-top-bar;
+@include foundation-everything;
+//@include foundation-global-styles;
+//@include foundation-grid;
+//@include foundation-typography;
+//@include foundation-button;
+//@include foundation-forms;
+//@include foundation-visibility-classes;
+//@include foundation-float-classes;
+//@include foundation-accordion;
+//@include foundation-badge;
+//@include foundation-breadcrumbs;
+//@include foundation-button-group;
+//@include foundation-callout;
+//@include foundation-close-button;
+//@include foundation-drilldown-menu;
+//@include foundation-dropdown;
+//@include foundation-dropdown-menu;
+//@include foundation-flex-video;
+//@include foundation-label;
+//@include foundation-media-object;
+//@include foundation-menu;
+//@include foundation-off-canvas;
+//@include foundation-orbit;
+//@include foundation-pagination;
+//@include foundation-progress-bar;
+//@include foundation-slider;
+//@include foundation-sticky;
+//@include foundation-reveal;
+//@include foundation-switch;
+//@include foundation-table;
+//@include foundation-tabs;
+//@include foundation-thumbnail;
+//@include foundation-title-bar;
+//@include foundation-tooltip;
+//@include foundation-top-bar;
+//
+//@include motion-ui-transitions;
+//@include motion-ui-animations;
 
-@include motion-ui-transitions;
-@include motion-ui-animations;
+// Custom Mixins
+// ---------------
+@function parseInt($n) { 
+  @return $n / ($n * 0 + 1);
+}
+
+@mixin rem($property, $values) {
+  $px : (); 
+  $rem: (); 
+
+  @each $value in $values { 
+
+    @if $value == 0 or $value == auto { 
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);    
+      $val: parseInt($value); 
+
+      @if $unit == "px" {  
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" { 
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {     
+    #{$property}: $px;  
+  } @else {
+    #{$property}: $px;  
+    #{$property}: $rem; 
+  }
+}
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+// Globals
+// ---------------
+body {
+	@include font-size(1.7);
+}
+.off-canvas {
+	background: $white;
+}
+
+
+// Title Bar
+// ----------------
+div.title-bar {
+	border-bottom: 1px solid $medium-gray;
+	@include rem(padding, 1rem 0);
+  * {
+  	display: inline-block;
+  }
+  button {
+  	font-family: $header-font-family;
+		@include font-size(1.6);
+		margin: 0;
+		@include rem(padding, 1.6rem 2rem);
+  }
+  
+  h1 {
+  	@include font-size(4.4);
+  	font-weight: 300;
+  	margin: 0;
+  	@include rem(vertical-align, -4rem);
+  	a {
+  		color: $black;
+  	}
+  	@include breakpoint(medium only) {
+  		@include font-size(3.4);
+	  	@include rem(vertical-align, -2rem);
+  	}
+  	@include breakpoint(small only) {
+  		@include font-size(2.2);
+	  	@include rem(vertical-align, -1.3rem);
+	  	line-height: 1;
+	  	font-weight: 700;
+  	}
+  	@media screen and (max-width: 45.6em) and (min-width: 0em) {
+  		@include rem(vertical-align, 0);
+  	}
+
+  }
+  img.logo {
+  	/*padding: 10px 30px 0 10px;
+    width: 337px;
+    max-width: 100%;*/
+  }
+  .logo-container {
+  	@include breakpoint(large only) {
+  		@include rem(padding, 0 0 0 1rem);
+  	}	
+  	@include breakpoint(medium only) {
+  		@include rem(padding, 0 0 0 1rem);
+  	}	
+  }
+  .menu-button-container {
+  	text-align: right;
+  }
+  
+}
+//ShareThis
+//-----------------
+div#social-share {
+	display: block;
+	height: 2.5em;
+	margin: 0;
+	text-align: center;
+	@include breakpoint (medium) {
+		/*display: inline-block;
+		float: right;*/
+		text-align: left;
+	}
+	#social-sharethis {
+		@include breakpoint (medium) {
+			/*display: inline-block;
+			border-top: 1px solid $medium-gray;*/
+		}
+	}
+	.stButton {
+		box-sizing: content-box;
+		margin: 0;
+		@include breakpoint (medium) {
+		/*	border-bottom: 1px solid $medium-gray;
+			display: block;*/
+
+		}
+	}
+}
+
+// Side Navigation
+// ---------------
+.sidenav {
+    padding: 2em 0em 2em 0em;
+    overflow: auto;
+    height: 100%;
+}
+.sidenav-list {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  li {
+    display: list-item;
+    margin: 0;
+
+    &:before {
+      display: none;
+    }
+
+    &:after {
+      display: none;
+    }
+    border-top: 1px solid $medium-gray;
+    /* font-size: $h4-font-size; */
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  a {
+    border: none;
+    color: $primary-color;
+    display: block;
+    font-family: $header-font-family;
+    line-height: 1;
+    padding: {
+      bottom: 1em;
+      left: 1.8em;
+      right: 1em;
+      top: 1em;
+    }
+
+    &:hover {
+      background-color: $light-gray;
+      color: $primary-color;
+      text-decoration: none;
+    }
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+    }
+
+    &.current {
+      color: $primary-color;
+      font-weight: $global-weight-bold;
+      border-left: 4px solid $primary-color;
+      padding-left: 1.4em;
+    }
+  }
+  ul.nested {
+
+  	a {
+  		&.current {
+  			border: none;
+  		}
+  	}	
+  }
+}
+
+/*.usa-sidenav-sub_list {
+  margin: 0;
+  width: 100%;
+
+  li {
+    border: none;
+    font-size: $h5-font-size;
+  }
+
+  a {
+    padding-left: 2.8rem;
+    line-height: $heading-line-height;
+  }
+
+  a:hover,
+  a.usa-current {
+    border: none;
+    padding-left: 2.8rem;
+  }
+
+  .usa-sidenav-sub_list {
+    a {
+      padding-left: 3.8rem;
+    }
+
+    a:hover {
+      padding-left: 3.8rem;
+    }
+  }
+} */
+
+//  Front Page
+// ---------------
+/* Intro Div */
+div.intro {
+	-webkit-box-shadow: 0 6px 0 rgba(0, 0, 0, 0.05);
+	box-shadow: 0 6px 0 rgba(0, 0, 0, 0.05);
+	margin: 1em 0 1em 0;
+
+}
+
+/* Front Navigation List */
+div.nav {
+	padding: 20px 0 0;
+	h2 {
+		font-weight: $global-weight-bold;
+		font-family: $source-sans-font-family;
+		text-align: center;
+		text-transform: uppercase;
+		color: #b70101;
+	}
+}
+div.intro-video {
+}
+
+ol#story-list {
+	counter-reset:li;
+	margin-bottom: 0;
+	position: relative;
+	h3 {
+		width: 50%;
+		margin-left: 50px;
+		margin-top: 0.5em;
+		margin-bottom: 0.2em;
+	}
+	p {
+		width: 50%;
+		margin-left: 50px;
+	}
+	li{
+		display: block;
+		/*&:after {
+			content: "";
+			display: block;
+			z-index: 2;
+			position: absolute;
+			right: 39%;
+			bottom: 0;
+			width: 3%;
+			height: 100%;
+			background: white repeat;
+		}*/
+		a {
+			/*background-size: 40% !important;*/
+			p {
+				color: black;
+			}
+		}
+	}
+	a{
+		display: block;
+		padding: 0 0 4px 4px;
+		-webkit-box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+		box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+		&:before {
+			content: counter(li);
+			display: block;
+			position: absolute;
+			background: #333;
+			color: white;
+			color: rgba(255, 255, 255, 0.8);
+			font-family: $source-sans-font-family;
+			font-weight: $global-weight-bold;
+			text-align: center;
+			counter-increment: li;
+			width: 1.6em;
+			height: 1.6em;
+			-webkit-border-radius: 1em;
+			border-radius: 1em;
+			@include font-size(2.2);
+			line-height: 1.6em;
+		} 
+	}
+}
+.more-info {
+	ol#story-list {
+		h3 {
+			width: 100%;
+			margin-left: 50px;
+			margin-top: 0.5em;
+			margin-bottom: 0.2em;
+		}
+		p {
+			width: 100%;
+			margin-left: 50px;
+		}
+		li{
+			display: block;
+			&:after {
+				display: none;
+
+			}
+
+		}
+		
+	
+	}
+}
+
+@include breakpoint(medium down) {
+	ol#story-list li#looking-back a {
+		display: block;
+		background: 100% 49% url('../img/story-list/2014-timeline.jpg') no-repeat;
+	}
+	ol#story-list li#building-awards a {
+		display: block;
+		background: 100% 49% url('../img/story-list/wei-building.jpg') no-repeat;
+	}
+	ol#story-list li#donor a {
+		display: block;
+		background: 100% 49% url('../img/story-list/donors.jpg') no-repeat;
+	}
+	ol#story-list li#engineered-softwood a {
+		display: block;
+		background: 100% 13% url('../img/story-list/engineered-softwood.jpg') no-repeat;
+	}
+	ol#story-list li#better-battery-imaging a {
+		display: block;
+		background: 100% 49% url('../img/story-list/better-battery-imaging.jpg') no-repeat;
+	}
+	ol#story-list li#cutting-carbon a {
+		display: block;
+		background: 100% 13% url('../img/story-list/cutting-carbon.png') no-repeat;
+	}
+	ol#story-list li#solar-textiles a {
+		display: block;
+		background: 100% 49% url('../img/story-list/solar-textiles.jpg') no-repeat;
+	}
+	ol#story-list li#poacic-acid a {
+		display: block;
+		background: 100% 30% url('../img/story-list/poacic-acid.jpg') no-repeat;
+	}
+	ol#story-list li#fieldwork a {
+		display: block;
+		background: 100% 49% url('../img/story-list/gratton-fieldwork.jpg') no-repeat;
+	}
+	ol#story-list li#awards a {
+		display: block;
+		background: 100% 49% url('../img/story-list/highlights.jpg') no-repeat;
+	}
+	ol#story-list li#eo-overview a {
+		display: block;
+		background: 100% 13% url('../img/story-list/education-outreach.jpg') no-repeat;
+	}
+	ol#story-list li#summit2014 a {
+		display: block;
+		background: 100% 49% url('../img/story-list/2014-summit.jpg') no-repeat;
+	}
+	ol#story-list li#student-team a {
+		display: block;
+		background: 100% 20% url('../img/story-list/student-contest-1.jpg') no-repeat;
+	}
+	ol#story-list li#reda a {
+		display: block;
+		background: 100% 49% url('../img/story-list/.jpg') no-repeat;
+	}
+	ol#story-list li#cb2e a {
+		display: block;
+		background: 100% 49% url('../img/story-list/cb2e.jpg') no-repeat;
+	}
+	ol#story-list li#mbi-visit a {
+		display: block;
+		background: 100% 49% url('../img/story-list/.jpg') no-repeat;
+	}
+	ol#story-list li#tinjum-epic a {
+		display: block;
+		background: 100% 49% url('../img/story-list/tinjum-epic.jpg') no-repeat;
+	}
+	ol#story-list li#mwerc a {
+		display: block;
+		background: 100% 49% url('../img/story-list/bruce-beihoff-jci.jpg') no-repeat;
+	}
+	ol#story-list li#deyang-qu a {
+		display: block;
+		background: 100% 49% url('../img/story-list/deyang-qu.jpg') no-repeat;
+	}
+	ol#story-list li#jci-lab a {
+		display: block;
+		background: 100% 49% url('../img/story-list/jci-lab-1.jpg') no-repeat;
+	}
+	ol#story-list li#juicebox a {
+		display: block;
+		background: 100% 49% url('../img/story-list/juicebox.jpg') no-repeat;
+	}
+	ol#story-list li#patents a {
+		display: block;
+		background: 100% 49% url('../img/story-list/patents.jpg') no-repeat;
+	}
+	ol#story-list li#financials a {
+		display: block;
+		background: 100% 49% url('../img/story-list/.jpg') no-repeat;
+	}
+	ol#story-list li#contacts a {
+		display: block;
+		background: 100% 49% url('../img/story-list/.jpg') no-repeat;
+	}
+}
+@include breakpoint(large up) {  
+	ol#story-list li#looking-back a {
+		display: block;
+		background: 100% 49% url('../img/story-list/2014-timeline.jpg') no-repeat;
+	}
+	ol#story-list li#building-awards a {
+		display: block;
+		background: 100% 49% url('../img/story-list/wei-building.jpg') no-repeat;
+	}
+	ol#story-list li#donor a {
+		display: block;
+		background: 100% 49% url('../img/story-list/donors.jpg') no-repeat;
+	}
+	ol#story-list li#engineered-softwood a {
+		display: block;
+		background: 100% 13% url('../img/story-list/engineered-softwood-large.jpg') no-repeat;
+	}
+	ol#story-list li#better-battery-imaging a {
+		display: block;
+		background: 100% 49% url('../img/story-list/better-battery-imaging-large.jpg') no-repeat;
+	}
+	ol#story-list li#cutting-carbon a {
+		display: block;
+		background: 100% 13% url('../img/story-list/cutting-carbon-large.png') no-repeat;
+	}
+	ol#story-list li#solar-textiles a {
+		display: block;
+		background: 100% 49% url('../img/story-list/solar-textiles-large.jpg') no-repeat;
+	}
+	ol#story-list li#poacic-acid a {
+		display: block;
+		background: 100% 30% url('../img/story-list/poacic-acid-large.jpg') no-repeat;
+	}
+	ol#story-list li#fieldwork a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#awards a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#eo-overview a {
+		display: block;
+		background: 100% 13% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#summit2014 a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#student-team a {
+		display: block;
+		background: 100% 20% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#reda a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#cb2e a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#mbi-visit a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#tinjum-epic a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#mwerc a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#deyang-qu a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#jci-lab a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#juicebox a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#patents a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#financials a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+	ol#story-list li#contacts a {
+		display: block;
+		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+	}
+}
+
+@include breakpoint(medium only) {  
+	ol#story-list {
+		h3 {
+			width: 50%;
+		}
+		p {
+			width: 50%;
+		}
+		li{
+			&:after {
+				right: 35%;
+				width: 2%;
+			}
+			a {
+				background-size: 35% !important;
+			}
+		}
+		a{
+
+		}
+	}
+}
+@media screen and (max-width: 43.75em) and (min-width: 0em) {
+  ol#story-list a {
+		background-image: none !important;
+	}
+	ol#story-list li:after {
+		display: none !important;
+	}
+	ol#story-list h3 {
+		width: 80%;
+		margin-left: 50px;
+	}
+	
+	ol#story-list p {
+		width: 80%;
+		margin-left: 50px;
+	}
+}
+
+.Flexible-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.Flexible-container iframe,   
+.Flexible-container object,  
+.Flexible-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+// Story Pages
+// ---------
+.story-container {
+	border-left: 1px solid $medium-gray;
+}
+.meta {
+	font-family: $source-sans-font-family;
+	color: $dark-gray;
+	@include font-size(1.4);
+	.writer {
+		&:before {
+	    content: " | ";
+	    margin: 0 2px;
+	    @include font-size(1.5);
+	  }  
+	}
+}
+.story-img {
+	@include rem(margin-bottom, 1.6rem);
+	.img-caption {
+		font-family: $source-sans-font-family;
+		color: $dark-gray;
+		@include font-size(1.5);
+		line-height: 1.2;
+		@include rem(margin-top, 0.4rem)
+		max-width: 100%;
+	}
+}
+.story {
+	h1 {
+		
+	}
+	@include breakpoint(medium only) {
+		margin:0 auto;
+		max-width: 780px;
+	}
+
+}
+.story-header {
+	@include rem(margin, 1.6rem 0)
+}
+.story-body {
+	p {
+		// Max width of paragraph is 75 characters per line
+		@include rem(max-width, 62rem);
+	}
+}
+.sidebar-img {
+	float: right;
+  @include rem(margin, 0.5rem 0 3rem 3rem);
+  @include breakpoint(medium only) {
+		max-width: 50%;
+	}
+  @include breakpoint(small only) {
+  	float: none;
+  	@include rem(margin, 1rem auto 1rem);
+  	max-width: 90%;
+  }
+  img {
+  	border: 1px solid $medium-gray;
+  }
+  p {
+  	font-family: $source-sans-font-family;
+		color: $dark-gray;
+		@include font-size(1.5);
+		line-height: 1.2;
+		@include rem(margin-top, 0.4rem)
+		max-width: 100%;
+  }
+}
+
+
+// Footer
+// ---------
+
+footer {
+//	width: 1920px;
+//	max-width: 100%;
+	background: url('../img/debut_dark.png') #333333;
+	padding: 30px 0;
+	img{
+		padding: 0 5px 0 0;
+	}
+	a {
+		color: white;
+	}
+	div.social-links {
+		text-align: right;
+		img{
+		    height:34px;   
+		}
+	}
+}
+
+div.footer-links {
+	padding-bottom: 20px;
+}
+
+div.footer-divider {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-color: #333;
+	border-color: rgba(255, 255, 255, 0.1);
+}
+
+div.credits{
+	color: white;
+	text-align: center;
+	padding: 20px 10%;
+	p {
+		margin: 0;
+		@include font-size(1.2);
+	}
+}
+
+@include breakpoint(small only) { 
+	footer {
+		text-align: center;
+		padding: 10px 0;
+		div.social-links {
+			text-align: center;
+			img{
+			    height:34px;   
+			}
+		}
+	}
+}
