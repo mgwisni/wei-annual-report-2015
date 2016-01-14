@@ -97,6 +97,13 @@ body {
 .off-canvas {
 	background: $white;
 }
+.uw-section-break {
+    background-color: $red;
+	  border: none;
+	  @include rem(margin, 1rem auto 0.5rem);
+    @include rem(width, 56px);
+    @include rem(height, 6px);
+}
 
 
 // Title Bar
@@ -217,10 +224,10 @@ div#social-share {
 
   a {
     border: none;
-    color: $primary-color;
+    color: $black;
     display: block;
     font-family: $header-font-family;
-    line-height: 1;
+    line-height: 1.5 !important;
     padding: {
       bottom: 1em;
       left: 1.8em;
@@ -244,6 +251,18 @@ div#social-share {
       font-weight: $global-weight-bold;
       border-left: 4px solid $primary-color;
       padding-left: 1.4em;
+    }
+    &.menu-section {
+    	font-weight: $global-weight-bold;
+    	text-transform: uppercase;
+    	&:after {
+		    border-color: $black transparent transparent;
+			}
+    	&.current {
+    		&:after {
+			    border-color: $primary-color transparent transparent;
+				}
+    	}
     }
   }
   ul.nested {
@@ -299,13 +318,15 @@ div.intro {
 
 /* Front Navigation List */
 div.nav {
-	padding: 20px 0 0;
+	@include rem(padding, 5rem 0 5rem);
 	h2 {
 		font-weight: $global-weight-bold;
 		font-family: $source-sans-font-family;
+		@include font-size(4.0);
+		@include rem(margin-bottom, 2rem);
 		text-align: center;
 		text-transform: uppercase;
-		color: #b70101;
+		color: $red;
 	}
 }
 div.intro-video {
@@ -316,14 +337,10 @@ ol#story-list {
 	margin-bottom: 0;
 	position: relative;
 	h3 {
+		@include font-size(3.0);
+		line-height: 1.1;
+		@include rem(margin, 1rem 0 0.5rem 50px);
 		width: 50%;
-		margin-left: 50px;
-		margin-top: 0.5em;
-		margin-bottom: 0.2em;
-	}
-	p {
-		width: 50%;
-		margin-left: 50px;
 	}
 	li{
 		display: block;
@@ -340,16 +357,22 @@ ol#story-list {
 		}*/
 		a {
 			/*background-size: 40% !important;*/
-			p {
+			h4 {
 				color: black;
+				@include font-size(2.4);
+				font-weight: 300;
+				@include rem(margin-bottom, 1rem);
+				@include rem(margin-left, 50px);
+				width: 50%;
+		
 			}
 		}
 	}
 	a{
 		display: block;
 		padding: 0 0 4px 4px;
-		-webkit-box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
-		box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+/*		-webkit-box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);
+		box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.05);*/
 		&:before {
 			content: counter(li);
 			display: block;
@@ -428,9 +451,9 @@ ol#story-list {
 		display: block;
 		background: 100% 30% url('../img/story-list/poacic-acid.jpg') no-repeat;
 	}
-	ol#story-list li#fieldwork a {
+	ol#story-list li#sustainable-pipeline a {
 		display: block;
-		background: 100% 49% url('../img/story-list/gratton-fieldwork.jpg') no-repeat;
+		background: 100% 49% url('../img/story-list/six-year-perennial-study.jpg') no-repeat;
 	}
 	ol#story-list li#awards a {
 		display: block;
@@ -526,9 +549,9 @@ ol#story-list {
 		display: block;
 		background: 100% 30% url('../img/story-list/poacic-acid-large.jpg') no-repeat;
 	}
-	ol#story-list li#fieldwork a {
+	ol#story-list li#sustainable-pipeline a {
 		display: block;
-		background: 100% 49% url('../img/story-list/-large.jpg') no-repeat;
+		background: 100% 49% url('../img/story-list/six-year-perennial-study-large.jpg') no-repeat;
 	}
 	ol#story-list li#awards a {
 		display: block;
